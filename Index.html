@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lets Fly | Experience the Joy of Travel</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            --primary: #FF5E3A; /* Passionate Orange */
+            --secondary: #2EC4B6; /* Happy Teal */
+            --dark: #1A1A1A;
+            --light: #F8F9FA;
+            --white: #FFFFFF;
+            --shadow: 0 15px 35px rgba(0,0,0,0.1);
+            --glass: rgba(255, 255, 255, 0.9);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* --- NAVBAR --- */
+        nav {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 30px 0;
+            z-index: 100;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 30px;
+            color: var(--white);
+            text-decoration: none;
+        }
+
+        /* Container for the logo image */
+.logo img {
+    height: 150px; /* Adjust this to make the logo larger or smaller */
+    width: auto;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.logo img:hover {
+    transform: scale(1.05); /* Subtle 'happy' pop when hovering */
+}
+
+/* Adjust the Navbar content to align everything vertically */
+.nav-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* This keeps links centered relative to the logo height */
+    padding: 10px 20px;
+}
+
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 35px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 400;
+            transition: 0.3s;
+        }
+
+        .nav-btn {
+            background: var(--primary);
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-weight: 600 !important;
+            box-shadow: 0 4px 15px rgba(255, 94, 58, 0.4);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 90vh;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.1)), 
+                        url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+        }
+
+        .hero-inner { max-width: 800px; }
+
+        .badge {
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(5px);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 14px;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            line-height: 1.1;
+            margin-bottom: 25px;
+        }
+
+        .highlight { color: var(--primary); }
+
+        /* --- SEARCH BOX (The Happiness Interface) --- */
+        .search-container {
+            background: var(--glass);
+            padding: 15px;
+            border-radius: 100px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+            margin-top: 40px;
+            width: 100%;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .search-field {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            padding: 0 25px;
+            border-right: 1px solid #eee;
+            text-align: left;
+        }
+
+        .search-field:last-of-type { border-right: none; }
+
+        .search-field i { color: var(--primary); margin-right: 15px; font-size: 20px; }
+
+        .search-field label {
+            display: block;
+            font-size: 11px;
+            color: #888;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .search-field input {
+            border: none;
+            outline: none;
+            background: transparent;
+            font-size: 15px;
+            color: var(--dark);
+            width: 100%;
+        }
+
+        .search-main-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 18px 45px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        .search-main-btn:hover {
+            transform: scale(1.05);
+            background: #e65231;
+        }
+
+        /* --- DESTINATIONS --- */
+        .destinations { padding: 100px 0; }
+
+        .section-intro {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-intro h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 35px;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+        }
+
+        .card:hover { transform: translateY(-15px); }
+
+        .card-img {
+            height: 280px;
+            position: relative;
+        }
+
+        .card-img img { width: 100%; height: 100%; object-fit: cover; }
+
+        .price-badge {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: var(--white);
+            padding: 8px 15px;
+            border-radius: 12px;
+            font-weight: 700;
+            color: var(--primary);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .card-content { padding: 30px; }
+
+        .card-content h3 { font-size: 22px; margin-bottom: 8px; }
+
+        .location {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #777;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .book-link {
+            text-decoration: none;
+            color: var(--secondary);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: 0.3s;
+        }
+
+        .book-link:hover { gap: 15px; }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .search-container {
+                flex-direction: column;
+                border-radius: 20px;
+                padding: 20px;
+            }
+            .search-field {
+                border-right: none;
+                border-bottom: 1px solid #eee;
+                padding: 15px 0;
+                width: 100%;
+            }
+            .search-main-btn { width: 100%; margin-top: 15px; }
+            .hero-title { font-size: 3rem; }
+        }
+        /* WhatsApp Floating Button */
+.whatsapp-float {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: #25d366;
+    color: #FFF;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 30px;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    z-index: 1000;
+    box-shadow: 2px 5px 15px rgba(0,0,0,0.3);
+    transition: all 0.3s ease;
+}
+
+/* Hover Effect: Show Tooltip */
+.whatsapp-float:hover {
+    transform: scale(1.1);
+    background-color: #128c7e;
+    color: #FFF;
+}
+
+.whatsapp-float .tooltip {
+    visibility: hidden;
+    width: 120px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    right: 125%; /* Position to the left of the button */
+    font-size: 14px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.whatsapp-float:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Happy Pulse Animation */
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5); }
+    70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+}
+
+.whatsapp-float {
+    animation: pulse 2s infinite;
+}
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="container nav-content">
+            <a href="#" class="logo" ><img src="images/LOGO PNG1.PNG" alt="Lets Fly Logo"></a>
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Packages</a></li>
+                <li><a href="#">Hotels</a></li>
+                <li><a href="#" class="nav-btn">Get Started</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="container hero-inner">
+           
+            <h1 class="hero-title">Adventure & <span class="highlight">Experience</span> The World</h1>
+            <p>Discover soulful destinations and create memories that last a lifetime with our exclusive hand-picked travel deals.</p>
+            
+            <div class="search-container">
+                <div class="search-field">
+                    <i class="fa-solid fa-earth-americas"></i>
+                    <div>
+                        <label>Destination</label>
+                        <input type="text" placeholder="Where to go?">
+                    </div>
+                </div>
+                <div class="search-field">
+                    <i class="fa-solid fa-calendar-days"></i>
+                    <div>
+                        <label>Type</label>
+                        <input type="text" placeholder="Adventure, Relax...">
+                    </div>
+                </div>
+                <button class="search-main-btn">Find My Trip</button>
+            </div>
+        </div>
+    </header>
+
+    <section class="destinations container">
+        <div class="section-intro">
+            <h2>Top <span class="highlight">Destinations</span></h2>
+            <p>Explore the most loved places around the globe by our community.</p>
+        </div>
+
+        <div class="grid">
+            <div class="card">
+                <div class="card-img">
+                    <img src="https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=800&q=80" alt="Taj Mahal">
+                    <div class="price-badge">₹12000 / Person</div>
+                </div>
+                <div class="card-content">
+                    <h3>Delhi-Agra</h3>
+                    <div class="location"><i class="fa-solid fa-location-dot"></i> Agra, India</div>
+                    <a href="#" class="book-link">Explore Deal <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+
+            <div class="card">
+                <div class="card-img">
+                    <img src="images/kashmir.jpg.jpeg" alt="Taj Mahal">
+                    <div class="price-badge">₹14000 / Person</div>
+                </div>
+                <div class="card-content">
+                    <h3>Kashmir</h3>
+                    <div class="location"><i class="fa-solid fa-location-dot"></i> Srinagar, India</div>
+                    <a href="#" class="book-link">Explore Deal <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-img">
+                    <img src="images/himachal.jpg.jpeg" alt="Taj Mahal">
+                    <div class="price-badge">₹13000 / Person</div>
+                </div>
+                <div class="card-content">
+                    <h3>Himachal</h3>
+                    <div class="location"><i class="fa-solid fa-location-dot"></i> manali, India</div>
+                    <a href="#" class="book-link">Explore Deal <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-img">
+                    <img src="images/singapore.jpg.jpeg" alt="Taj Mahal">
+                    <div class="price-badge">₹59000 / Person</div>
+                </div>
+                <div class="card-content">
+                    <h3>Singapore</h3>
+                    <div class="location"><i class="fa-solid fa-location-dot"></i> singapore</div>
+                    <a href="#" class="book-link">Explore Deal <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-img">
+                    <img src="images/malaysia.jpg.jpeg" alt="Taj Mahal">
+                    <div class="price-badge">₹18000 / Person</div>
+                </div>
+                <div class="card-content">
+                    <h3>Malayasia</h3>
+                    <div class="location"><i class="fa-solid fa-location-dot"></i> kuala lumpur </div>
+                    <a href="#" class="book-link">Explore Deal <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-img">
+                    <img src="images/thailand.jpg.jpeg" alt="Taj Mahal">
+                    <div class="price-badge">₹16000/ Person</div>
+                </div>
+                <div class="card-content">
+                    <h3>Thailand</h3>
+                    <div class="location"><i class="fa-solid fa-location-dot"></i> Bangkok</div>
+                    <a href="#" class="book-link">Explore Deal <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-img">
+                    <img src="images/DUBAI.jpg.jpeg" alt="Taj Mahal">
+                    <div class="price-badge">₹65000 / Person</div>
+                </div>
+                <div class="card-content">
+                    <h3>Dubai</h3>
+                    <div class="location"><i class="fa-solid fa-location-dot"></i> UAE</div>
+                    <a href="#" class="book-link">Explore Deal <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-img">
+                    <img src="images/srilanka.jpg.jpeg" alt="Taj Mahal">
+                    <div class="price-badge">₹35000 / Person</div>
+                </div>
+                <div class="card-content">
+                    <h3>srilanka</h3>
+                    <div class="location"><i class="fa-solid fa-location-dot"></i> colombo</div>
+                    <a href="#" class="book-link">Explore Deal <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-img">
+                    <img src="https://images.unsplash.com/photo-1512495039889-52a3b799c9bc?auto=format&fit=crop&w=800&q=80" alt="Taj Mahal">
+                    <div class="price-badge">₹95000 / Person</div>
+                </div>
+                <div class="card-content">
+                    <h3>Russia</h3>
+                    <div class="location"><i class="fa-solid fa-location-dot"></i> Moscow</div>
+                    <a href="#" class="book-link">Explore Deal <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-img">
+                    <img src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=800&q=80" alt="London">
+                    <div class="price-badge">₹1,20,000 / Person</div>
+                </div>
+                <div class="card-content">
+                    <h3>London</h3>
+                    <div class="location"><i class="fa-solid fa-location-dot"></i> London, UK</div>
+                    <a href="#" class="book-link">Explore Deal <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-img">
+                    <img src="images/paris.jpg.jpeg" alt="Moscow">
+                    <div class="price-badge">₹99,000 / Person</div>
+                </div>
+                <div class="card-content">
+                    <h3>Parris</h3>
+                    <div class="location"><i class="fa-solid fa-location-dot"></i> France</div>
+                    <a href="#" class="book-link">Explore Deal <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+             <div class="card">
+                <div class="card-img">
+                    <img src="images/SWISS.jpg.jpeg" alt="Moscow">
+                    <div class="price-badge">₹110,000 / Person</div>
+                </div>
+                <div class="card-content">
+                    <h3>Swiss</h3>
+                    <div class="location"><i class="fa-solid fa-location-dot"></i> Switzerland</div>
+                    <a href="#" class="book-link">Explore Deal <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+<a href="https://wa.me/+919966790770?text=I'm%20interested%20in%20booking%20a%20trip%20with%20Lets%20Fly!" 
+   class="whatsapp-float" 
+   target="_blank">
+    <i class="fa-brands fa-whatsapp"></i>
+    <span class="tooltip">Chat with us!</span>
+</a>
+</body>
+</html>
