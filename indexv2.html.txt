@@ -1,0 +1,1757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lets Fly | Experience the Joy of Travel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #FF5E3A;
+            --primary-dark: #e04a28;
+            --secondary: #2EC4B6;
+            --accent: #FFB800;
+            --dark: #0F0F14;
+            --dark2: #1A1A24;
+            --mid: #2A2A3A;
+            --light: #F4F2EE;
+            --white: #FFFFFF;
+            --text-muted: #888;
+            --glass: rgba(255,255,255,0.92);
+            --shadow-card: 0 20px 60px rgba(0,0,0,0.10);
+            --radius-lg: 28px;
+            --radius-pill: 999px;
+            --transition: 0.35s cubic-bezier(0.4,0,0.2,1);
+        }
+
+        *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--light);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        /* ─── SCROLLBAR ─── */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #eee; }
+        ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
+
+        .container { max-width: 1240px; margin: 0 auto; padding: 0 20px; }
+
+        /* ─── NAVBAR ─── */
+        nav {
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            z-index: 1000;
+            padding: 0;
+            transition: var(--transition);
+        }
+
+        nav.scrolled {
+            background: rgba(15,15,20,0.96);
+            backdrop-filter: blur(16px);
+            box-shadow: 0 2px 30px rgba(0,0,0,0.3);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--white);
+            text-decoration: none;
+            letter-spacing: 0.5px;
+            display: flex; align-items: center; gap: 8px;
+        }
+
+        .logo-dot { color: var(--primary); }
+        .logo-plane { font-size: 20px; color: var(--secondary); animation: plane-sway 3s ease-in-out infinite; }
+        @keyframes plane-sway {
+            0%,100% { transform: rotate(-5deg) translateY(0); }
+            50% { transform: rotate(5deg) translateY(-4px); }
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: rgba(255,255,255,0.85);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 15px;
+            padding: 8px 16px;
+            border-radius: var(--radius-pill);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover { color: var(--white); background: rgba(255,255,255,0.1); }
+
+        .nav-btn {
+            background: var(--primary) !important;
+            color: var(--white) !important;
+            padding: 10px 26px !important;
+            font-weight: 600 !important;
+            box-shadow: 0 4px 20px rgba(255,94,58,0.35);
+        }
+
+        .nav-btn:hover { background: var(--primary-dark) !important; transform: translateY(-1px); }
+
+        /* Hamburger */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 8px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            border: none;
+        }
+        .hamburger span {
+            display: block; width: 24px; height: 2px;
+            background: white; border-radius: 2px;
+            transition: var(--transition);
+        }
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+        /* Mobile menu */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 80px; left: 0; right: 0;
+            background: rgba(15,15,20,0.98);
+            backdrop-filter: blur(20px);
+            padding: 20px;
+            z-index: 999;
+            flex-direction: column;
+            gap: 8px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .mobile-menu.open { display: flex; }
+        .mobile-menu a {
+            color: rgba(255,255,255,0.85);
+            text-decoration: none;
+            font-size: 16px;
+            padding: 14px 20px;
+            border-radius: 12px;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        .mobile-menu a:hover { background: rgba(255,255,255,0.08); color: white; }
+        .mobile-menu .mob-btn {
+            background: var(--primary);
+            color: white !important;
+            text-align: center;
+            margin-top: 8px;
+            font-weight: 600;
+        }
+
+        /* ─── HERO ─── */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(160deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.2) 60%, rgba(0,0,0,0.5) 100%),
+                        url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 120px;
+            background: linear-gradient(to top, var(--light), transparent);
+        }
+
+        .hero-inner {
+            max-width: 820px;
+            padding: 0 20px;
+            padding-top: 80px;
+            position: relative;
+            z-index: 1;
+            animation: hero-in 1s ease both;
+        }
+
+        @keyframes hero-in {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.25);
+            padding: 8px 22px;
+            border-radius: var(--radius-pill);
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+            color: var(--accent);
+        }
+
+        .hero-badge i { color: var(--accent); }
+
+        .hero-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.8rem, 7vw, 5.5rem);
+            line-height: 1.05;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .highlight { color: var(--primary); }
+
+        .hero-subtitle {
+            font-size: clamp(15px, 2vw, 18px);
+            color: rgba(255,255,255,0.80);
+            max-width: 560px;
+            margin: 0 auto 40px;
+            line-height: 1.65;
+        }
+
+        /* ─── SEARCH BOX ─── */
+        .search-wrap {
+            background: var(--glass);
+            border-radius: var(--radius-lg);
+            padding: 10px;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.25);
+            display: flex;
+            align-items: stretch;
+            gap: 0;
+            animation: hero-in 1s 0.2s ease both;
+            overflow: hidden;
+        }
+
+        .search-field {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 16px 22px;
+            border-right: 1px solid rgba(0,0,0,0.08);
+            cursor: pointer;
+            transition: var(--transition);
+            border-radius: 18px;
+        }
+
+        .search-field:last-of-type { border-right: none; }
+        .search-field:hover { background: rgba(255,94,58,0.05); }
+
+        .search-icon {
+            width: 42px; height: 42px;
+            background: linear-gradient(135deg, var(--primary), #ff8c6b);
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            color: white;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .search-field:nth-child(2) .search-icon {
+            background: linear-gradient(135deg, var(--secondary), #5de0d8);
+        }
+
+        .sf-text label {
+            display: block;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 3px;
+        }
+
+        .sf-text input {
+            border: none; outline: none;
+            background: transparent;
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--dark);
+            font-family: 'DM Sans', sans-serif;
+            width: 100%;
+        }
+
+        .sf-text input::placeholder { color: #bbb; }
+
+        .search-btn {
+            background: linear-gradient(135deg, var(--primary), #ff8c6b);
+            color: white;
+            border: none;
+            padding: 14px 36px;
+            border-radius: 18px;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            transition: var(--transition);
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'DM Sans', sans-serif;
+            box-shadow: 0 8px 25px rgba(255,94,58,0.35);
+        }
+
+        .search-btn:hover { transform: scale(1.03); box-shadow: 0 12px 35px rgba(255,94,58,0.45); }
+
+        /* ─── STATS ─── */
+        .stats-strip {
+            background: var(--dark);
+            padding: 30px 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            text-align: center;
+        }
+
+        .stat-item { padding: 10px; }
+        .stat-num {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: var(--primary);
+            line-height: 1;
+        }
+        .stat-label {
+            font-size: 13px;
+            color: rgba(255,255,255,0.55);
+            margin-top: 4px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+        /* ─── SECTIONS ─── */
+        .section { padding: 90px 0; }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .section-label {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 700;
+            line-height: 1.15;
+        }
+
+        .section-title span { color: var(--primary); }
+
+        .view-all {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            padding: 10px 22px;
+            border: 2px solid var(--primary);
+            border-radius: var(--radius-pill);
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+
+        .view-all:hover { background: var(--primary); color: white; }
+
+        /* ─── CATEGORIES ─── */
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 16px;
+        }
+
+        .cat-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 24px 16px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            border: 2px solid transparent;
+        }
+
+        .cat-card:hover, .cat-card.active {
+            border-color: var(--primary);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 35px rgba(255,94,58,0.15);
+        }
+
+        .cat-icon {
+            width: 52px; height: 52px;
+            background: linear-gradient(135deg, #FFF0EC, #ffe0d9);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            margin: 0 auto 12px;
+        }
+
+        .cat-card:nth-child(2) .cat-icon { background: linear-gradient(135deg, #E0FAF9, #c4f5f2); }
+        .cat-card:nth-child(3) .cat-icon { background: linear-gradient(135deg, #FFF8E0, #fff0b3); }
+        .cat-card:nth-child(4) .cat-icon { background: linear-gradient(135deg, #F0E8FF, #e0d0ff); }
+        .cat-card:nth-child(5) .cat-icon { background: linear-gradient(135deg, #E8F5FF, #cce8ff); }
+
+        .cat-name { font-size: 13px; font-weight: 600; color: var(--dark); }
+        .cat-count { font-size: 11px; color: var(--text-muted); margin-top: 3px; }
+
+        /* ─── DESTINATION CARDS ─── */
+        .dest-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 28px;
+        }
+
+        .dest-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-card);
+            transition: var(--transition);
+            cursor: pointer;
+            animation: card-in 0.6s ease both;
+        }
+
+        @keyframes card-in {
+            from { opacity:0; transform: translateY(20px); }
+            to { opacity:1; transform: translateY(0); }
+        }
+
+        .dest-card:hover { transform: translateY(-10px); box-shadow: 0 30px 70px rgba(0,0,0,0.15); }
+
+        .card-img-wrap {
+            position: relative;
+            height: 240px;
+            overflow: hidden;
+        }
+
+        .card-img-wrap img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .dest-card:hover .card-img-wrap img { transform: scale(1.07); }
+
+        .card-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 50%);
+        }
+
+        .card-top-badges {
+            position: absolute;
+            top: 16px; left: 16px; right: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .hot-badge {
+            background: var(--accent);
+            color: var(--dark);
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 5px 12px;
+            border-radius: var(--radius-pill);
+        }
+
+        .wishlist-btn {
+            width: 36px; height: 36px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 15px;
+            color: #ccc;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+        }
+
+        .wishlist-btn:hover, .wishlist-btn.active { color: #e74c3c; }
+
+        .price-tag {
+            position: absolute;
+            bottom: 16px; left: 16px;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(8px);
+            padding: 6px 14px;
+            border-radius: var(--radius-pill);
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .rating-tag {
+            position: absolute;
+            bottom: 16px; right: 16px;
+            background: var(--accent);
+            padding: 5px 12px;
+            border-radius: var(--radius-pill);
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--dark);
+            display: flex; align-items: center; gap: 4px;
+        }
+
+        .card-body { padding: 22px; }
+
+        .card-meta {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+
+        .card-meta i { color: var(--primary); font-size: 11px; }
+
+        .card-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+
+        .card-tags {
+            display: flex; flex-wrap: wrap; gap: 6px;
+            margin-bottom: 16px;
+        }
+
+        .tag {
+            background: #f4f2ee;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: var(--radius-pill);
+            color: #666;
+        }
+
+        .card-footer-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 16px;
+            border-top: 1px solid #f0eeea;
+        }
+
+        .duration { font-size: 13px; color: var(--text-muted); }
+        .duration i { color: var(--secondary); margin-right: 4px; }
+
+        .book-btn {
+            background: linear-gradient(135deg, var(--primary), #ff8c6b);
+            color: white;
+            padding: 10px 20px;
+            border-radius: var(--radius-pill);
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex; align-items: center; gap: 8px;
+            border: none;
+            cursor: pointer;
+            font-family: 'DM Sans', sans-serif;
+            box-shadow: 0 4px 15px rgba(255,94,58,0.3);
+        }
+
+        .book-btn:hover { transform: translateX(3px); box-shadow: 0 6px 20px rgba(255,94,58,0.4); }
+
+        /* ─── WHY US ─── */
+        .why-section { background: var(--dark); color: white; padding: 90px 0; }
+
+        .why-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .why-img-side { position: relative; }
+
+        .why-main-img {
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            height: 480px;
+        }
+
+        .why-main-img img { width: 100%; height: 100%; object-fit: cover; }
+
+        .why-float-card {
+            position: absolute;
+            background: white;
+            border-radius: 18px;
+            padding: 18px 22px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            color: var(--dark);
+        }
+
+        .why-float-card.card1 { bottom: -20px; left: -25px; }
+        .why-float-card.card2 { top: 30px; right: -25px; background: var(--primary); color: white; }
+
+        .why-float-card .fc-num {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem; font-weight: 700;
+        }
+        .why-float-card.card2 .fc-num { color: white; }
+        .why-float-card .fc-label { font-size: 12px; color: var(--text-muted); }
+        .why-float-card.card2 .fc-label { color: rgba(255,255,255,0.8); }
+
+        .why-content .section-label { margin-bottom: 8px; }
+        .why-content .section-title { color: white; margin-bottom: 20px; }
+        .why-content p { color: rgba(255,255,255,0.65); line-height: 1.75; margin-bottom: 35px; font-size: 15px; }
+
+        .features-list {
+            list-style: none;
+            display: flex; flex-direction: column; gap: 16px;
+        }
+
+        .features-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            font-size: 15px;
+            color: rgba(255,255,255,0.8);
+        }
+
+        .feat-icon {
+            width: 38px; height: 38px;
+            background: rgba(255,94,58,0.15);
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--primary);
+            flex-shrink: 0;
+            font-size: 16px;
+        }
+
+        /* ─── TESTIMONIALS ─── */
+        .testimonials { padding: 90px 0; background: var(--white); }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 28px;
+        }
+
+        .testimonial-card {
+            background: var(--light);
+            border-radius: var(--radius-lg);
+            padding: 34px;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .testimonial-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-card); }
+
+        .quote-mark {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 80px;
+            line-height: 1;
+            color: var(--primary);
+            opacity: 0.15;
+            position: absolute;
+            top: 16px; left: 24px;
+        }
+
+        .testimonial-text {
+            font-size: 15px;
+            color: #555;
+            line-height: 1.75;
+            margin-bottom: 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonial-author {
+            display: flex; align-items: center; gap: 12px;
+        }
+
+        .author-avatar {
+            width: 48px; height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), #ff8c6b);
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 700; color: white; font-size: 18px;
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        .author-name { font-weight: 700; font-size: 15px; }
+        .author-trip { font-size: 12px; color: var(--text-muted); }
+        .stars { color: var(--accent); font-size: 13px; margin-bottom: 2px; }
+
+        /* ─── CTA ─── */
+        .cta-section {
+            margin: 0 20px 80px;
+            background: linear-gradient(135deg, var(--primary), #ff8c6b, #ffb347);
+            border-radius: 32px;
+            padding: 70px 40px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '✈';
+            position: absolute;
+            font-size: 200px;
+            opacity: 0.07;
+            right: -20px; top: -40px;
+            transform: rotate(20deg);
+        }
+
+        .cta-section h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.8rem, 4vw, 3rem);
+            margin-bottom: 14px;
+        }
+
+        .cta-section p { opacity: 0.9; margin-bottom: 32px; font-size: 16px; }
+
+        .cta-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+        .cta-btn-white {
+            background: white; color: var(--primary);
+            padding: 14px 36px;
+            border-radius: var(--radius-pill);
+            font-weight: 700; font-size: 15px;
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex; align-items: center; gap: 10px;
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        .cta-btn-white:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
+
+        .cta-btn-outline {
+            border: 2px solid rgba(255,255,255,0.7);
+            color: white;
+            padding: 14px 36px;
+            border-radius: var(--radius-pill);
+            font-weight: 700; font-size: 15px;
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex; align-items: center; gap: 10px;
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        .cta-btn-outline:hover { background: rgba(255,255,255,0.15); border-color: white; }
+
+        /* ─── WHATSAPP ─── */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 28px; right: 28px;
+            background: #25d366;
+            color: white;
+            width: 60px; height: 60px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 28px;
+            text-decoration: none;
+            z-index: 999;
+            box-shadow: 0 5px 20px rgba(37,211,102,0.5);
+            transition: var(--transition);
+            animation: wa-pulse 2.5s infinite;
+        }
+
+        @keyframes wa-pulse {
+            0%,100% { box-shadow: 0 5px 20px rgba(37,211,102,0.5); }
+            50% { box-shadow: 0 5px 35px rgba(37,211,102,0.7); }
+        }
+
+        .whatsapp-float:hover { transform: scale(1.12); background: #1ebe5c; }
+
+        .wa-tooltip {
+            position: absolute;
+            right: 72px;
+            background: var(--dark);
+            color: white;
+            font-size: 13px;
+            font-weight: 500;
+            padding: 7px 14px;
+            border-radius: var(--radius-pill);
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition);
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        .whatsapp-float:hover .wa-tooltip { opacity: 1; }
+
+        /* ─── FOOTER ─── */
+        .main-footer {
+            background: var(--dark);
+            color: white;
+            padding: 80px 0 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 50px;
+            padding-bottom: 60px;
+        }
+
+        .footer-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem; font-weight: 700;
+            color: white; margin-bottom: 16px;
+        }
+
+        .footer-desc {
+            color: rgba(255,255,255,0.50);
+            font-size: 14px;
+            line-height: 1.75;
+            margin-bottom: 24px;
+        }
+
+        .social-links {
+            display: flex; gap: 10px;
+        }
+
+        .social-links a {
+            width: 40px; height: 40px;
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            color: rgba(255,255,255,0.7);
+            font-size: 15px;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover { background: var(--primary); border-color: var(--primary); color: white; transform: translateY(-3px); }
+
+        .footer-col h4 {
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            margin-bottom: 22px;
+            color: white;
+            position: relative; padding-bottom: 12px;
+        }
+
+        .footer-col h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 28px; height: 2px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 12px; }
+        .footer-col ul li a {
+            color: rgba(255,255,255,0.55);
+            text-decoration: none;
+            font-size: 14px;
+            transition: var(--transition);
+            display: flex; align-items: center; gap: 8px;
+        }
+        .footer-col ul li a::before { content: '→'; font-size: 11px; color: var(--primary); }
+        .footer-col ul li a:hover { color: white; padding-left: 4px; }
+
+        .contact-item {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 16px;
+            align-items: flex-start;
+            font-size: 14px;
+            color: rgba(255,255,255,0.55);
+        }
+
+        .contact-item i {
+            width: 32px; height: 32px;
+            background: rgba(255,94,58,0.15);
+            border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--primary);
+            flex-shrink: 0;
+            font-size: 13px;
+        }
+
+        .contact-item span { line-height: 1.6; }
+
+        .newsletter-label {
+            font-size: 12px;
+            color: rgba(255,255,255,0.45);
+            margin-bottom: 12px;
+        }
+
+        .newsletter-box {
+            display: flex;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: var(--radius-pill);
+            overflow: hidden;
+            padding: 4px;
+        }
+
+        .newsletter-box input {
+            background: transparent; border: none; outline: none;
+            color: white; padding: 10px 16px;
+            width: 100%; font-size: 13px;
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        .newsletter-box input::placeholder { color: rgba(255,255,255,0.35); }
+
+        .newsletter-box button {
+            background: var(--primary);
+            border: none; color: white;
+            width: 40px; height: 38px; border-radius: 50%;
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            transition: var(--transition); flex-shrink: 0;
+        }
+
+        .newsletter-box button:hover { background: var(--primary-dark); transform: rotate(15deg); }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.07);
+            padding: 24px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .footer-bottom p { color: rgba(255,255,255,0.4); font-size: 13px; }
+        .footer-bottom .heart { color: var(--primary); }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 1024px) {
+            .why-grid { grid-template-columns: 1fr; }
+            .why-img-side { display: none; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hamburger { display: flex; }
+
+            .hero { background-attachment: scroll; }
+
+            .search-wrap {
+                flex-direction: column;
+                border-radius: 22px;
+            }
+            .search-field {
+                border-right: none;
+                border-bottom: 1px solid rgba(0,0,0,0.08);
+                border-radius: 0;
+                padding: 14px 16px;
+            }
+            .search-field:last-of-type { border-bottom: none; }
+            .search-btn { border-radius: 14px; justify-content: center; width: 100%; padding: 14px; }
+
+            .section-header { flex-direction: column; align-items: flex-start; }
+            .dest-grid { grid-template-columns: 1fr; }
+            .testimonials-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+            .why-float-card { display: none; }
+
+            .cta-section { padding: 50px 24px; margin: 0 12px 60px; }
+        }
+
+        @media (max-width: 480px) {
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .categories-grid { grid-template-columns: repeat(3, 1fr); }
+            .hero-title { font-size: 2.4rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+    <div class="container nav-content">
+        <a href="#" class="logo">
+            <span class="logo-plane">✈</span>
+            Lets<span class="logo-dot">Fly</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Packages</a></li>
+            <li><a href="#">Hotels</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="https://wa.me/+919966790770" class="nav-btn">Book Now</a></li>
+        </ul>
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+    <a href="#">Home</a>
+    <a href="#">Packages</a>
+    <a href="#">Hotels</a>
+    <a href="#">About</a>
+    <a href="https://wa.me/+919966790770" class="mob-btn">📞 Book Now</a>
+</div>
+
+<!-- HERO -->
+<header class="hero">
+    <div class="container hero-inner">
+        <div class="hero-badge">
+            <i class="fa-solid fa-star"></i>
+            Trusted by 10,000+ Happy Travelers
+        </div>
+        <h1 class="hero-title">
+            Explore the World with<br><span class="highlight">Joy & Wonder</span>
+        </h1>
+        <p class="hero-subtitle">
+            Hand-picked destinations, unbeatable prices, and memories that last a lifetime. Your dream trip is just one click away.
+        </p>
+
+        <div class="search-wrap">
+            <div class="search-field">
+                <div class="search-icon"><i class="fa-solid fa-earth-americas"></i></div>
+                <div class="sf-text">
+                    <label>Destination</label>
+                    <input type="text" placeholder="Where do you want to go?">
+                </div>
+            </div>
+            <div class="search-field">
+                <div class="search-icon"><i class="fa-solid fa-compass"></i></div>
+                <div class="sf-text">
+                    <label>Experience Type</label>
+                    <input type="text" placeholder="Adventure, Relax, Culture...">
+                </div>
+            </div>
+            <button class="search-btn">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                Find My Trip
+            </button>
+        </div>
+    </div>
+</header>
+
+<!-- STATS -->
+<div class="stats-strip">
+    <div class="container">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-num">10K+</div>
+                <div class="stat-label">Happy Travelers</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-num">50+</div>
+                <div class="stat-label">Destinations</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-num">100%</div>
+                <div class="stat-label">Satisfaction</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-num">5★</div>
+                <div class="stat-label">Rated Service</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- CATEGORIES -->
+<section class="section">
+    <div class="container">
+        <div class="section-header">
+            <div>
+                <p class="section-label">Browse by Type</p>
+                <h2 class="section-title">What's Your <span>Travel Style?</span></h2>
+            </div>
+        </div>
+        <div class="categories-grid">
+            <div class="cat-card active">
+                <div class="cat-icon">🏖️</div>
+                <div class="cat-name">Beach</div>
+                <div class="cat-count">12 trips</div>
+            </div>
+            <div class="cat-card">
+                <div class="cat-icon">🏔️</div>
+                <div class="cat-name">Mountains</div>
+                <div class="cat-count">8 trips</div>
+            </div>
+            <div class="cat-card">
+                <div class="cat-icon">🌆</div>
+                <div class="cat-name">City Tours</div>
+                <div class="cat-count">15 trips</div>
+            </div>
+            <div class="cat-card">
+                <div class="cat-icon">🛕</div>
+                <div class="cat-name">Spiritual</div>
+                <div class="cat-count">6 trips</div>
+            </div>
+            <div class="cat-card">
+                <div class="cat-icon">🤿</div>
+                <div class="cat-name">Adventure</div>
+                <div class="cat-count">10 trips</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- DESTINATIONS -->
+<section class="section" style="padding-top: 0;">
+    <div class="container">
+        <div class="section-header">
+            <div>
+                <p class="section-label">Handpicked for You</p>
+                <h2 class="section-title">Top <span>Destinations</span></h2>
+            </div>
+            <a href="#" class="view-all">View All <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+
+        <div class="dest-grid">
+
+            <!-- Card 1 -->
+            <div class="dest-card">
+                <div class="card-img-wrap">
+                    <img src="https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=800&q=80" alt="Delhi-Agra">
+                    <div class="card-overlay"></div>
+                    <div class="card-top-badges">
+                        <span class="hot-badge">🔥 Popular</span>
+                        <button class="wishlist-btn"><i class="fa-solid fa-heart"></i></button>
+                    </div>
+                    <div class="price-tag">₹12,000/person</div>
+                    <div class="rating-tag"><i class="fa-solid fa-star"></i> 4.8</div>
+                </div>
+                <div class="card-body">
+                    <div class="card-meta"><i class="fa-solid fa-location-dot"></i> Agra, India</div>
+                    <h3 class="card-title">Delhi – Agra</h3>
+                    <div class="card-tags">
+                        <span class="tag">Heritage</span>
+                        <span class="tag">Culture</span>
+                        <span class="tag">Iconic</span>
+                    </div>
+                    <div class="card-footer-row">
+                        <div class="duration"><i class="fa-regular fa-clock"></i> 3 Days / 2 Nights</div>
+                        <a href="https://wa.me/+919966790770?text=I'm interested in Delhi-Agra trip!" class="book-btn">
+                            Book Now <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="dest-card">
+                <div class="card-img-wrap">
+                    <img src="images/kashmir.jpg.jpeg" alt="Kashmir" onerror="this.src='https://images.unsplash.com/photo-1566837945700-30057527ade0?auto=format&fit=crop&w=800&q=80'">
+                    <div class="card-overlay"></div>
+                    <div class="card-top-badges">
+                        <span class="hot-badge">❄️ Must See</span>
+                        <button class="wishlist-btn"><i class="fa-solid fa-heart"></i></button>
+                    </div>
+                    <div class="price-tag">₹14,000/person</div>
+                    <div class="rating-tag"><i class="fa-solid fa-star"></i> 4.9</div>
+                </div>
+                <div class="card-body">
+                    <div class="card-meta"><i class="fa-solid fa-location-dot"></i> Srinagar, India</div>
+                    <h3 class="card-title">Kashmir</h3>
+                    <div class="card-tags">
+                        <span class="tag">Scenic</span>
+                        <span class="tag">Mountains</span>
+                        <span class="tag">Houseboats</span>
+                    </div>
+                    <div class="card-footer-row">
+                        <div class="duration"><i class="fa-regular fa-clock"></i> 5 Days / 4 Nights</div>
+                        <a href="https://wa.me/+919966790770?text=I'm interested in Kashmir trip!" class="book-btn">
+                            Book Now <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="dest-card">
+                <div class="card-img-wrap">
+                    <img src="images/himachal.jpg.jpeg" alt="Himachal" onerror="this.src='https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=800&q=80'">
+                    <div class="card-overlay"></div>
+                    <div class="card-top-badges">
+                        <span class="hot-badge">🏔️ Adventure</span>
+                        <button class="wishlist-btn"><i class="fa-solid fa-heart"></i></button>
+                    </div>
+                    <div class="price-tag">₹13,000/person</div>
+                    <div class="rating-tag"><i class="fa-solid fa-star"></i> 4.7</div>
+                </div>
+                <div class="card-body">
+                    <div class="card-meta"><i class="fa-solid fa-location-dot"></i> Manali, India</div>
+                    <h3 class="card-title">Himachal Pradesh</h3>
+                    <div class="card-tags">
+                        <span class="tag">Snow</span>
+                        <span class="tag">Trekking</span>
+                        <span class="tag">Nature</span>
+                    </div>
+                    <div class="card-footer-row">
+                        <div class="duration"><i class="fa-regular fa-clock"></i> 4 Days / 3 Nights</div>
+                        <a href="https://wa.me/+919966790770?text=I'm interested in Himachal trip!" class="book-btn">
+                            Book Now <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="dest-card">
+                <div class="card-img-wrap">
+                    <img src="images/singapore.jpg.jpeg" alt="Singapore" onerror="this.src='https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=800&q=80'">
+                    <div class="card-overlay"></div>
+                    <div class="card-top-badges">
+                        <span class="hot-badge">🌏 International</span>
+                        <button class="wishlist-btn"><i class="fa-solid fa-heart"></i></button>
+                    </div>
+                    <div class="price-tag">₹59,000/person</div>
+                    <div class="rating-tag"><i class="fa-solid fa-star"></i> 4.9</div>
+                </div>
+                <div class="card-body">
+                    <div class="card-meta"><i class="fa-solid fa-location-dot"></i> Singapore</div>
+                    <h3 class="card-title">Singapore</h3>
+                    <div class="card-tags">
+                        <span class="tag">Luxury</span>
+                        <span class="tag">City</span>
+                        <span class="tag">Shopping</span>
+                    </div>
+                    <div class="card-footer-row">
+                        <div class="duration"><i class="fa-regular fa-clock"></i> 5 Days / 4 Nights</div>
+                        <a href="https://wa.me/+919966790770?text=I'm interested in Singapore trip!" class="book-btn">
+                            Book Now <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 5 -->
+            <div class="dest-card">
+                <div class="card-img-wrap">
+                    <img src="images/malaysia.jpg.jpeg" alt="Malaysia" onerror="this.src='https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=800&q=80'">
+                    <div class="card-overlay"></div>
+                    <div class="card-top-badges">
+                        <span class="hot-badge">🌴 Tropical</span>
+                        <button class="wishlist-btn"><i class="fa-solid fa-heart"></i></button>
+                    </div>
+                    <div class="price-tag">₹18,000/person</div>
+                    <div class="rating-tag"><i class="fa-solid fa-star"></i> 4.6</div>
+                </div>
+                <div class="card-body">
+                    <div class="card-meta"><i class="fa-solid fa-location-dot"></i> Kuala Lumpur</div>
+                    <h3 class="card-title">Malaysia</h3>
+                    <div class="card-tags">
+                        <span class="tag">Budget</span>
+                        <span class="tag">Beaches</span>
+                        <span class="tag">Food</span>
+                    </div>
+                    <div class="card-footer-row">
+                        <div class="duration"><i class="fa-regular fa-clock"></i> 5 Days / 4 Nights</div>
+                        <a href="https://wa.me/+919966790770?text=I'm interested in Malaysia trip!" class="book-btn">
+                            Book Now <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 6 -->
+            <div class="dest-card">
+                <div class="card-img-wrap">
+                    <img src="images/thailand.jpg.jpeg" alt="Thailand" onerror="this.src='https://images.unsplash.com/photo-1563492065599-3520f775eeed?auto=format&fit=crop&w=800&q=80'">
+                    <div class="card-overlay"></div>
+                    <div class="card-top-badges">
+                        <span class="hot-badge">🎉 Best Value</span>
+                        <button class="wishlist-btn"><i class="fa-solid fa-heart"></i></button>
+                    </div>
+                    <div class="price-tag">₹16,000/person</div>
+                    <div class="rating-tag"><i class="fa-solid fa-star"></i> 4.8</div>
+                </div>
+                <div class="card-body">
+                    <div class="card-meta"><i class="fa-solid fa-location-dot"></i> Bangkok, Thailand</div>
+                    <h3 class="card-title">Thailand</h3>
+                    <div class="card-tags">
+                        <span class="tag">Party</span>
+                        <span class="tag">Temples</span>
+                        <span class="tag">Beaches</span>
+                    </div>
+                    <div class="card-footer-row">
+                        <div class="duration"><i class="fa-regular fa-clock"></i> 6 Days / 5 Nights</div>
+                        <a href="https://wa.me/+919966790770?text=I'm interested in Thailand trip!" class="book-btn">
+                            Book Now <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 7 -->
+            <div class="dest-card">
+                <div class="card-img-wrap">
+                    <img src="images/DUBAI.jpg.jpeg" alt="Dubai" onerror="this.src='https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=800&q=80'">
+                    <div class="card-overlay"></div>
+                    <div class="card-top-badges">
+                        <span class="hot-badge">💎 Luxury</span>
+                        <button class="wishlist-btn"><i class="fa-solid fa-heart"></i></button>
+                    </div>
+                    <div class="price-tag">₹65,000/person</div>
+                    <div class="rating-tag"><i class="fa-solid fa-star"></i> 4.9</div>
+                </div>
+                <div class="card-body">
+                    <div class="card-meta"><i class="fa-solid fa-location-dot"></i> Dubai, UAE</div>
+                    <h3 class="card-title">Dubai</h3>
+                    <div class="card-tags">
+                        <span class="tag">Luxury</span>
+                        <span class="tag">Desert</span>
+                        <span class="tag">Shopping</span>
+                    </div>
+                    <div class="card-footer-row">
+                        <div class="duration"><i class="fa-regular fa-clock"></i> 5 Days / 4 Nights</div>
+                        <a href="https://wa.me/+919966790770?text=I'm interested in Dubai trip!" class="book-btn">
+                            Book Now <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 8 -->
+            <div class="dest-card">
+                <div class="card-img-wrap">
+                    <img src="images/srilanka.jpg.jpeg" alt="Sri Lanka" onerror="this.src='https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?auto=format&fit=crop&w=800&q=80'">
+                    <div class="card-overlay"></div>
+                    <div class="card-top-badges">
+                        <span class="hot-badge">🏝️ Island</span>
+                        <button class="wishlist-btn"><i class="fa-solid fa-heart"></i></button>
+                    </div>
+                    <div class="price-tag">₹35,000/person</div>
+                    <div class="rating-tag"><i class="fa-solid fa-star"></i> 4.7</div>
+                </div>
+                <div class="card-body">
+                    <div class="card-meta"><i class="fa-solid fa-location-dot"></i> Colombo, Sri Lanka</div>
+                    <h3 class="card-title">Sri Lanka</h3>
+                    <div class="card-tags">
+                        <span class="tag">Beaches</span>
+                        <span class="tag">Wildlife</span>
+                        <span class="tag">Tea Estates</span>
+                    </div>
+                    <div class="card-footer-row">
+                        <div class="duration"><i class="fa-regular fa-clock"></i> 6 Days / 5 Nights</div>
+                        <a href="https://wa.me/+919966790770?text=I'm interested in Sri Lanka trip!" class="book-btn">
+                            Book Now <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 9 -->
+            <div class="dest-card">
+                <div class="card-img-wrap">
+                    <img src="https://images.unsplash.com/photo-1512495039889-52a3b799c9bc?auto=format&fit=crop&w=800&q=80" alt="Russia">
+                    <div class="card-overlay"></div>
+                    <div class="card-top-badges">
+                        <span class="hot-badge">🏰 Historic</span>
+                        <button class="wishlist-btn"><i class="fa-solid fa-heart"></i></button>
+                    </div>
+                    <div class="price-tag">₹95,000/person</div>
+                    <div class="rating-tag"><i class="fa-solid fa-star"></i> 4.6</div>
+                </div>
+                <div class="card-body">
+                    <div class="card-meta"><i class="fa-solid fa-location-dot"></i> Moscow, Russia</div>
+                    <h3 class="card-title">Russia</h3>
+                    <div class="card-tags">
+                        <span class="tag">Architecture</span>
+                        <span class="tag">History</span>
+                        <span class="tag">Snow</span>
+                    </div>
+                    <div class="card-footer-row">
+                        <div class="duration"><i class="fa-regular fa-clock"></i> 7 Days / 6 Nights</div>
+                        <a href="https://wa.me/+919966790770?text=I'm interested in Russia trip!" class="book-btn">
+                            Book Now <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 10 -->
+            <div class="dest-card">
+                <div class="card-img-wrap">
+                    <img src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=800&q=80" alt="London">
+                    <div class="card-overlay"></div>
+                    <div class="card-top-badges">
+                        <span class="hot-badge">🎡 Europe</span>
+                        <button class="wishlist-btn"><i class="fa-solid fa-heart"></i></button>
+                    </div>
+                    <div class="price-tag">₹1,20,000/person</div>
+                    <div class="rating-tag"><i class="fa-solid fa-star"></i> 4.8</div>
+                </div>
+                <div class="card-body">
+                    <div class="card-meta"><i class="fa-solid fa-location-dot"></i> London, UK</div>
+                    <h3 class="card-title">London</h3>
+                    <div class="card-tags">
+                        <span class="tag">Culture</span>
+                        <span class="tag">Museums</span>
+                        <span class="tag">Iconic</span>
+                    </div>
+                    <div class="card-footer-row">
+                        <div class="duration"><i class="fa-regular fa-clock"></i> 7 Days / 6 Nights</div>
+                        <a href="https://wa.me/+919966790770?text=I'm interested in London trip!" class="book-btn">
+                            Book Now <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 11 -->
+            <div class="dest-card">
+                <div class="card-img-wrap">
+                    <img src="images/paris.jpg.jpeg" alt="Paris" onerror="this.src='https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=800&q=80'">
+                    <div class="card-overlay"></div>
+                    <div class="card-top-badges">
+                        <span class="hot-badge">💕 Romance</span>
+                        <button class="wishlist-btn"><i class="fa-solid fa-heart"></i></button>
+                    </div>
+                    <div class="price-tag">₹99,000/person</div>
+                    <div class="rating-tag"><i class="fa-solid fa-star"></i> 4.9</div>
+                </div>
+                <div class="card-body">
+                    <div class="card-meta"><i class="fa-solid fa-location-dot"></i> Paris, France</div>
+                    <h3 class="card-title">Paris</h3>
+                    <div class="card-tags">
+                        <span class="tag">Romance</span>
+                        <span class="tag">Art</span>
+                        <span class="tag">Cuisine</span>
+                    </div>
+                    <div class="card-footer-row">
+                        <div class="duration"><i class="fa-regular fa-clock"></i> 6 Days / 5 Nights</div>
+                        <a href="https://wa.me/+919966790770?text=I'm interested in Paris trip!" class="book-btn">
+                            Book Now <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 12 -->
+            <div class="dest-card">
+                <div class="card-img-wrap">
+                    <img src="images/SWISS.jpg.jpeg" alt="Switzerland" onerror="this.src='https://images.unsplash.com/photo-1508193638397-1c4234db14d8?auto=format&fit=crop&w=800&q=80'">
+                    <div class="card-overlay"></div>
+                    <div class="card-top-badges">
+                        <span class="hot-badge">⛷️ Premium</span>
+                        <button class="wishlist-btn"><i class="fa-solid fa-heart"></i></button>
+                    </div>
+                    <div class="price-tag">₹1,10,000/person</div>
+                    <div class="rating-tag"><i class="fa-solid fa-star"></i> 5.0</div>
+                </div>
+                <div class="card-body">
+                    <div class="card-meta"><i class="fa-solid fa-location-dot"></i> Switzerland</div>
+                    <h3 class="card-title">Switzerland</h3>
+                    <div class="card-tags">
+                        <span class="tag">Alps</span>
+                        <span class="tag">Skiing</span>
+                        <span class="tag">Scenic</span>
+                    </div>
+                    <div class="card-footer-row">
+                        <div class="duration"><i class="fa-regular fa-clock"></i> 8 Days / 7 Nights</div>
+                        <a href="https://wa.me/+919966790770?text=I'm interested in Switzerland trip!" class="book-btn">
+                            Book Now <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- WHY US -->
+<section class="why-section">
+    <div class="container">
+        <div class="why-grid">
+            <div class="why-img-side">
+                <div class="why-main-img">
+                    <img src="https://images.unsplash.com/photo-1488085061387-422e29b40080?auto=format&fit=crop&w=800&q=80" alt="Travel Experience">
+                </div>
+                <div class="why-float-card card1">
+                    <div class="fc-num">10K+</div>
+                    <div class="fc-label">Trips Completed</div>
+                </div>
+                <div class="why-float-card card2">
+                    <div class="fc-num">4.9★</div>
+                    <div class="fc-label">Average Rating</div>
+                </div>
+            </div>
+            <div class="why-content">
+                <p class="section-label">Why Choose Us</p>
+                <h2 class="section-title">Travel Smarter with <span>Lets Fly</span></h2>
+                <p>We're not just a travel agency — we're your personal adventure planners. From visa assistance to hotel bookings, we handle everything so you can focus on making memories.</p>
+                <ul class="features-list">
+                    <li>
+                        <div class="feat-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                        <div><strong>Fully Verified Packages</strong><br><small style="color:rgba(255,255,255,0.5)">Every trip is personally verified by our team for quality and safety.</small></div>
+                    </li>
+                    <li>
+                        <div class="feat-icon"><i class="fa-solid fa-headset"></i></div>
+                        <div><strong>24/7 Customer Support</strong><br><small style="color:rgba(255,255,255,0.5)">We're always a call or WhatsApp away, wherever you are in the world.</small></div>
+                    </li>
+                    <li>
+                        <div class="feat-icon"><i class="fa-solid fa-tag"></i></div>
+                        <div><strong>Best Price Guarantee</strong><br><small style="color:rgba(255,255,255,0.5)">Found it cheaper elsewhere? We'll match the price, no questions asked.</small></div>
+                    </li>
+                    <li>
+                        <div class="feat-icon"><i class="fa-solid fa-id-card"></i></div>
+                        <div><strong>Visa Assistance</strong><br><small style="color:rgba(255,255,255,0.5)">Complete documentation support for all international destinations.</small></div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+    <div class="container">
+        <div class="section-header">
+            <div>
+                <p class="section-label">What Travelers Say</p>
+                <h2 class="section-title">Real Stories, <span>Real Joy</span></h2>
+            </div>
+        </div>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="quote-mark">"</div>
+                <div class="stars">★★★★★</div>
+                <p class="testimonial-text">Lets Fly made our Kashmir honeymoon absolutely magical. Every detail was perfectly arranged and the team was responsive throughout. Highly recommend!</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">R</div>
+                    <div>
+                        <div class="author-name">Riya Sharma</div>
+                        <div class="author-trip">Kashmir Honeymoon Trip</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="quote-mark">"</div>
+                <div class="stars">★★★★★</div>
+                <p class="testimonial-text">Best travel experience of my life. The Dubai package was incredible value, everything from flights to hotel was taken care of. Will book again!</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">V</div>
+                    <div>
+                        <div class="author-name">Venkat Reddy</div>
+                        <div class="author-trip">Dubai Family Trip</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="quote-mark">"</div>
+                <div class="stars">★★★★★</div>
+                <p class="testimonial-text">Thailand trip was absolutely perfect! Lets Fly handled every detail seamlessly. The WhatsApp support was so helpful throughout the journey.</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">P</div>
+                    <div>
+                        <div class="author-name">Priya Nair</div>
+                        <div class="author-trip">Thailand Group Tour</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<div class="container">
+    <div class="cta-section">
+        <h2>Ready to Start Your Adventure?</h2>
+        <p>Talk to our travel experts and get a custom quote in minutes — completely free!</p>
+        <div class="cta-btns">
+            <a href="https://wa.me/+919966790770?text=I want to plan my dream trip!" class="cta-btn-white">
+                <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
+            </a>
+            <a href="tel:+919966790770" class="cta-btn-outline">
+                <i class="fa-solid fa-phone"></i> Call Us Now
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- WHATSAPP FLOAT -->
+<a href="https://wa.me/+919966790770?text=I'm interested in booking a trip with Lets Fly!" class="whatsapp-float" target="_blank">
+    <i class="fa-brands fa-whatsapp"></i>
+    <span class="wa-tooltip">Chat with us!</span>
+</a>
+
+<!-- FOOTER -->
+<footer class="main-footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <div class="footer-logo">✈ LetsFly</div>
+                <p class="footer-desc">Fueling your passion for discovery. We provide hand-picked experiences that turn your dream vacations into unforgettable reality.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/letsflyholiday/" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Tour Packages</a></li>
+                    <li><a href="#">Hotel Deals</a></li>
+                    <li><a href="https://wa.me/+919966790770">Contact Us</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms & Conditions</a></li>
+                    <li><a href="#">Refund Policy</a></li>
+                    <li><a href="#">Help Center</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Get In Touch</h4>
+                <div class="contact-item">
+                    <i class="fa-solid fa-phone"></i>
+                    <span>+91 99667 90770</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fa-solid fa-envelope"></i>
+                    <span>info@letsflyholiday.com</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <span>D No.23/929, 1st floor SpaceQ, Vahabpet, Nellore - 524003, Andhra Pradesh</span>
+                </div>
+                <p class="newsletter-label" style="margin-top:20px;">Subscribe for travel deals</p>
+                <div class="newsletter-box">
+                    <input type="email" placeholder="Your email address">
+                    <button type="button"><i class="fa-solid fa-paper-plane"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 Lets Fly. All rights reserved.</p>
+            <p>Made with <span class="heart">❤️</span> for Happy Travelers in Nellore, AP</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+        navbar.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // Hamburger toggle
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        mobileMenu.classList.toggle('open');
+    });
+
+    // Close mobile menu on link click
+    mobileMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            mobileMenu.classList.remove('open');
+        });
+    });
+
+    // Wishlist toggle
+    document.querySelectorAll('.wishlist-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            btn.classList.toggle('active');
+            const icon = btn.querySelector('i');
+            icon.style.transform = 'scale(1.4)';
+            setTimeout(() => icon.style.transform = '', 300);
+        });
+    });
+
+    // Category filter (visual only)
+    document.querySelectorAll('.cat-card').forEach(card => {
+        card.addEventListener('click', () => {
+            document.querySelectorAll('.cat-card').forEach(c => c.classList.remove('active'));
+            card.classList.add('active');
+        });
+    });
+
+    // Card entrance animation on scroll
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, i) => {
+            if (entry.isIntersecting) {
+                entry.target.style.animationDelay = `${(i % 3) * 0.1}s`;
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.dest-card').forEach(card => observer.observe(card));
+</script>
+
+</body>
+</html>
