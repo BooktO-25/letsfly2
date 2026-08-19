@@ -2,17 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lets Fly | Experience the Joy of Travel</title>
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Lets Fly Holiday Pvt Ltd | Experience the Joy of Travel</title>
+
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* --- CSS VARIABLES & RESET --- */
         :root {
-            --primary: #FF5E3A; /* Passionate Orange */
-            --secondary: #2EC4B6; /* Happy Teal */
+            --primary: #FF5E3A;
+            --secondary: #2EC4B6;
             --dark: #1A1A1A;
             --light: #F8F9FA;
             --white: #FFFFFF;
@@ -20,488 +18,187 @@
             --glass: rgba(255, 255, 255, 0.9);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        html { -webkit-text-size-adjust: 100%; }
+        body { background-color: var(--light); color: var(--dark); overflow-x: hidden; }
+        img { max-width: 100%; display: block; }
 
-        body {
-            background-color: var(--light);
-            color: var(--dark);
-            overflow-x: hidden;
-        }
+        .icon { width: 1em; height: 1em; display: inline-block; vertical-align: -0.15em; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+        .icon-solid { fill: currentColor; stroke: none; }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
         /* --- NAVBAR --- */
-        nav {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            padding: 30px 0;
-            z-index: 100;
-        }
+        nav { position: absolute; top: 0; left: 0; width: 100%; padding: 20px 0; z-index: 100; }
+        .nav-content { display: flex; justify-content: space-between; align-items: center; padding: 10px 20px; }
+        .logo { font-family: 'Playfair Display', serif; font-size: 30px; color: var(--white); text-decoration: none; flex-shrink: 0; }
+        .logo img { height: 100px; width: auto; display: block; transition: transform 0.3s ease; }
+        .logo img:hover { transform: scale(1.05); }
+        .nav-links { display: flex; list-style: none; gap: 35px; align-items: center; }
+        .nav-links a { color: var(--white); text-decoration: none; font-weight: 400; transition: 0.3s; }
+        .nav-btn { background: var(--primary); padding: 12px 28px; border-radius: 50px; font-weight: 600 !important; box-shadow: 0 4px 15px rgba(255, 94, 58, 0.4); }
 
-        .nav-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+        .nav-toggle { display: none; background: none; border: none; color: var(--white); font-size: 26px; cursor: pointer; padding: 8px; z-index: 200; }
 
-        .logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 30px;
-            color: var(--white);
-            text-decoration: none;
-        }
-
-        /* Container for the logo image */
-.logo img {
-    height: 150px; /* Adjust this to make the logo larger or smaller */
-    width: auto;
-    display: block;
-    transition: transform 0.3s ease;
-}
-
-.logo img:hover {
-    transform: scale(1.05); /* Subtle 'happy' pop when hovering */
-}
-
-/* Adjust the Navbar content to align everything vertically */
-.nav-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center; /* This keeps links centered relative to the logo height */
-    padding: 10px 20px;
-}
-
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 35px;
-            align-items: center;
-        }
-
-        .nav-links a {
-            color: var(--white);
-            text-decoration: none;
-            font-weight: 400;
-            transition: 0.3s;
-        }
-
-        .nav-btn {
-            background: var(--primary);
-            padding: 12px 28px;
-            border-radius: 50px;
-            font-weight: 600 !important;
-            box-shadow: 0 4px 15px rgba(255, 94, 58, 0.4);
-        }
-
-        /* --- HERO SECTION --- */
+        /* --- HERO --- */
         .hero {
-            height: 90vh;
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.1)), 
+            min-height: 90vh;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.1)),
                         url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=80');
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: var(--white);
+            background-size: cover; background-position: center;
+            display: flex; align-items: center; justify-content: center; text-align: center;
+            color: var(--white); padding: 130px 15px 60px;
         }
-
-        .hero-inner { max-width: 800px; }
-
-        .badge {
-            background: rgba(255,255,255,0.2);
-            backdrop-filter: blur(5px);
-            padding: 8px 20px;
-            border-radius: 50px;
-            font-size: 14px;
-            letter-spacing: 1px;
-            margin-bottom: 20px;
-            display: inline-block;
-        }
-
-        .hero-title {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2.5rem, 8vw, 4.5rem);
-            line-height: 1.1;
-            margin-bottom: 25px;
-        }
-
+        .hero-inner { max-width: 800px; width: 100%; }
+        .hero-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 8vw, 4.5rem); line-height: 1.15; margin-bottom: 20px; word-wrap: break-word; }
+        .hero p { font-size: clamp(0.9rem, 2.5vw, 1.1rem); padding: 0 10px; }
         .highlight { color: var(--primary); }
 
-        /* --- SEARCH BOX (The Happiness Interface) --- */
-        .search-container {
-            background: var(--glass);
-            padding: 15px;
-            border-radius: 100px;
-            display: flex;
-            align-items: center;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
-            margin-top: 40px;
-            width: 100%;
-            max-width: 900px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .search-field {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            padding: 0 25px;
-            border-right: 1px solid #eee;
-            text-align: left;
-        }
-
+        /* --- SEARCH BOX --- */
+        .search-container { background: var(--glass); padding: 15px; border-radius: 100px; display: flex; align-items: center; box-shadow: 0 25px 50px rgba(0,0,0,0.2); margin-top: 40px; width: 100%; max-width: 900px; margin-left: auto; margin-right: auto; }
+        .search-field { flex: 1; display: flex; align-items: center; padding: 0 25px; border-right: 1px solid #eee; text-align: left; min-width: 0; }
         .search-field:last-of-type { border-right: none; }
-
-        .search-field i { color: var(--primary); margin-right: 15px; font-size: 20px; }
-
-        .search-field label {
-            display: block;
-            font-size: 11px;
-            color: #888;
-            text-transform: uppercase;
-            font-weight: 700;
-        }
-
-        .search-field input {
-            border: none;
-            outline: none;
-            background: transparent;
-            font-size: 15px;
-            color: var(--dark);
-            width: 100%;
-        }
-
-        .search-main-btn {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 18px 45px;
-            border-radius: 50px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.3s ease;
-        }
-
-        .search-main-btn:hover {
-            transform: scale(1.05);
-            background: #e65231;
-        }
+        .search-field .icon { color: var(--primary); margin-right: 15px; font-size: 20px; flex-shrink: 0; }
+        .search-field label { display: block; font-size: 11px; color: #888; text-transform: uppercase; font-weight: 700; }
+        .search-field input { border: none; outline: none; background: transparent; font-size: 15px; color: var(--dark); width: 100%; min-width: 0; }
+        .search-main-btn { background: var(--primary); color: white; border: none; padding: 18px 45px; border-radius: 50px; font-weight: 600; cursor: pointer; transition: 0.3s ease; white-space: nowrap; }
+        .search-main-btn:hover { transform: scale(1.05); background: #e65231; }
 
         /* --- DESTINATIONS --- */
         .destinations { padding: 100px 0; }
-
-        .section-intro {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-
-        .section-intro h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 36px;
-            margin-bottom: 10px;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 35px;
-        }
-
-        .card {
-            background: var(--white);
-            border-radius: 30px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-        }
-
+        .section-intro { text-align: center; margin-bottom: 60px; padding: 0 15px; }
+        .section-intro h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 5vw, 36px); margin-bottom: 10px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 35px; }
+        .card { background: var(--white); border-radius: 30px; overflow: hidden; box-shadow: var(--shadow); transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; }
         .card:hover { transform: translateY(-15px); }
-
-        .card-img {
-            height: 280px;
-            position: relative;
-        }
-
+        .card-img { height: 280px; position: relative; }
         .card-img img { width: 100%; height: 100%; object-fit: cover; }
-
-        .price-badge {
-            position: absolute;
-            bottom: 20px;
-            left: 20px;
-            background: var(--white);
-            padding: 8px 15px;
-            border-radius: 12px;
-            font-weight: 700;
-            color: var(--primary);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
+        .price-badge { position: absolute; bottom: 20px; left: 20px; background: var(--white); padding: 8px 15px; border-radius: 12px; font-weight: 700; color: var(--primary); box-shadow: 0 5px 15px rgba(0,0,0,0.1); font-size: 14px; }
         .card-content { padding: 30px; }
-
         .card-content h3 { font-size: 22px; margin-bottom: 8px; }
-
-        .location {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: #777;
-            font-size: 14px;
-            margin-bottom: 20px;
-        }
-
-        .book-link {
-            text-decoration: none;
-            color: var(--secondary);
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transition: 0.3s;
-        }
-
+        .location { display: flex; align-items: center; gap: 8px; color: #777; font-size: 14px; margin-bottom: 20px; }
+        .location .icon { color: var(--primary); }
+        .book-link { text-decoration: none; color: var(--secondary); font-weight: 600; display: flex; align-items: center; gap: 10px; transition: 0.3s; }
         .book-link:hover { gap: 15px; }
 
-        /* --- RESPONSIVE --- */
-        @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .search-container {
-                flex-direction: column;
-                border-radius: 20px;
-                padding: 20px;
-            }
-            .search-field {
-                border-right: none;
-                border-bottom: 1px solid #eee;
-                padding: 15px 0;
-                width: 100%;
-            }
-            .search-main-btn { width: 100%; margin-top: 15px; }
-            .hero-title { font-size: 3rem; }
-        }
         /* WhatsApp Floating Button */
-.whatsapp-float {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    background-color: #25d366;
-    color: #FFF;
-    border-radius: 50px;
-    text-align: center;
-    font-size: 30px;
-    width: 60px;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    z-index: 1000;
-    box-shadow: 2px 5px 15px rgba(0,0,0,0.3);
-    transition: all 0.3s ease;
-}
+        .whatsapp-float { position: fixed; bottom: 20px; right: 20px; background-color: #25d366; color: #FFF; border-radius: 50px; text-align: center; font-size: 28px; width: 55px; height: 55px; display: flex; align-items: center; justify-content: center; text-decoration: none; z-index: 1000; box-shadow: 2px 5px 15px rgba(0,0,0,0.3); transition: all 0.3s ease; }
+        .whatsapp-float:hover { transform: scale(1.1); background-color: #128c7e; color: #FFF; }
+        .whatsapp-float .tooltip { visibility: hidden; width: 120px; background-color: #333; color: #fff; text-align: center; border-radius: 6px; padding: 5px; position: absolute; z-index: 1; right: 125%; font-size: 14px; opacity: 0; transition: opacity 0.3s; }
+        .whatsapp-float:hover .tooltip { visibility: visible; opacity: 1; }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5); } 70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); } 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); } }
+        .whatsapp-float { animation: pulse 2s infinite; }
 
-/* Hover Effect: Show Tooltip */
-.whatsapp-float:hover {
-    transform: scale(1.1);
-    background-color: #128c7e;
-    color: #FFF;
-}
+        /* --- FOOTER --- */
+        .main-footer { background: #111111; color: #ffffff; padding: 80px 0 30px; margin-top: 100px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 40px; padding-bottom: 50px; }
+        .footer-col h3 { font-size: 1.2rem; margin-bottom: 25px; font-weight: 600; position: relative; }
+        .footer-col h3::after { content: ''; position: absolute; left: 0; bottom: -10px; width: 35px; height: 3px; background: var(--primary); border-radius: 5px; }
+        .footer-col p, .footer-col span { color: #999; font-size: 14px; line-height: 1.6; }
+        .logo-footer { font-family: 'Playfair Display', serif; margin-bottom: 15px; word-wrap: break-word; }
+        .footer-desc { margin-bottom: 20px; }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 15px; }
+        .footer-col ul li a { color: #ccc; text-decoration: none; font-size: 14px; transition: 0.3s ease; }
+        .footer-col ul li a:hover { color: var(--primary); padding-left: 8px; }
 
-.whatsapp-float .tooltip {
-    visibility: hidden;
-    width: 120px;
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    border-radius: 6px;
-    padding: 5px;
-    position: absolute;
-    z-index: 1;
-    right: 125%; /* Position to the left of the button */
-    font-size: 14px;
-    opacity: 0;
-    transition: opacity 0.3s;
-}
+        .social-links { display: flex; gap: 15px; margin-top: 10px; }
+        .social-links a { color: #ccc; font-size: 16px; width: 38px; height: 38px; border-radius: 50%; border: 1px solid #333; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: 0.3s; }
+        .social-links a:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
 
-.whatsapp-float:hover .tooltip {
-    visibility: visible;
-    opacity: 1;
-}
+        .contact-item { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 15px; color: #999; font-size: 14px; }
+        .contact-item .icon { color: var(--primary); margin-top: 3px; flex-shrink: 0; }
 
-/* Happy Pulse Animation */
-@keyframes pulse {
-    0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5); }
-    70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
-}
+        .newsletter-box { display: flex; background: #222; padding: 5px; border-radius: 50px; margin-top: 20px; }
+        .newsletter-box input { background: transparent; border: none; outline: none; color: white; padding: 10px 15px; width: 100%; min-width: 0; }
+        .newsletter-box button { background: var(--primary); border: none; color: white; width: 45px; height: 40px; border-radius: 50%; cursor: pointer; transition: 0.3s; flex-shrink: 0; }
+        .newsletter-box button:hover { transform: rotate(15deg) scale(1.1); }
 
-.whatsapp-float {
-    animation: pulse 2s infinite;
-}
-/* --- FOOTER SPECIFIC STYLES --- */
-.main-footer {
-    background: #111111;
-    color: #ffffff;
-    padding: 80px 0 30px;
-    margin-top: 100px;
-}
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.05); padding-top: 30px; text-align: center; color: #666; font-size: 13px; padding-left: 15px; padding-right: 15px; }
 
-.footer-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 40px;
-    padding-bottom: 50px;
-}
+        /* --- RESPONSIVE --- */
+        @media (max-width: 900px) {
+            .nav-toggle { display: block; }
+            .nav-links { display: none; position: fixed; top: 0; right: 0; height: 100vh; width: 70%; max-width: 300px; background: var(--dark); flex-direction: column; justify-content: center; align-items: flex-start; gap: 28px; padding: 40px; box-shadow: -10px 0 30px rgba(0,0,0,0.3); }
+            .nav-links.open { display: flex; }
+            .nav-btn { align-self: flex-start; }
+            .logo img { height: 70px; }
+        }
 
-.footer-col h3 {
-    font-size: 1.2rem;
-    margin-bottom: 25px;
-    font-weight: 600;
-    position: relative;
-}
+        @media (max-width: 768px) {
+            .hero { padding-top: 110px; }
+            .search-container { flex-direction: column; border-radius: 20px; padding: 20px; }
+            .search-field { border-right: none; border-bottom: 1px solid #eee; padding: 15px 0; width: 100%; }
+            .search-main-btn { width: 100%; margin-top: 15px; }
+            .destinations { padding: 60px 0; }
+            .card-content { padding: 22px; }
+            .main-footer { padding: 60px 0 20px; text-align: center; }
+            .footer-col h3::after { left: 50%; transform: translateX(-50%); }
+            .newsletter-box { max-width: 300px; margin: 20px auto; }
+            .social-links { justify-content: center; }
+            .contact-item { justify-content: center; text-align: left; }
+        }
 
-/* The Orange Line under Titles */
-.footer-col h3::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: -10px;
-    width: 35px;
-    height: 3px;
-    background: var(--primary); /* Sunset Orange */
-    border-radius: 5px;
-}
-
-.footer-col p {
-    color: #999;
-    font-size: 14px;
-    line-height: 1.6;
-    margin-bottom: 20px;
-}
-
-.footer-col ul {
-    list-style: none;
-}
-
-.footer-col ul li {
-    margin-bottom: 15px;
-}
-
-.footer-col ul li a {
-    color: #ccc;
-    text-decoration: none;
-    font-size: 14px;
-    transition: 0.3s ease;
-}
-
-.footer-col ul li a:hover {
-    color: var(--primary);
-    padding-left: 8px; /* Subtle movement effect */
-}
-
-/* Newsletter Input Style */
-.newsletter-box {
-    display: flex;
-    background: #222;
-    padding: 5px;
-    border-radius: 50px;
-    margin-top: 20px;
-}
-
-.newsletter-box input {
-    background: transparent;
-    border: none;
-    outline: none;
-    color: white;
-    padding: 10px 15px;
-    width: 100%;
-}
-
-.newsletter-box button {
-    background: var(--primary);
-    border: none;
-    color: white;
-    width: 45px;
-    height: 40px;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.newsletter-box button:hover {
-    transform: rotate(15deg) scale(1.1);
-}
-
-.footer-bottom {
-    border-top: 1px solid rgba(255,255,255,0.05);
-    padding-top: 30px;
-    text-align: center;
-    color: #666;
-    font-size: 13px;
-}
-
-/* Media Query for perfect stacking */
-@media (max-width: 768px) {
-    .main-footer {
-        padding: 60px 0 20px;
-        text-align: center;
-    }
-    .footer-col h3::after {
-        left: 50%;
-        transform: translateX(-50%);
-    }
-    .newsletter-box {
-        max-width: 300px;
-        margin: 20px auto;
-    }
-}
+        @media (max-width: 420px) {
+            .container { padding: 0 14px; }
+            .logo img { height: 55px; }
+            .hero { padding: 100px 12px 50px; }
+            .whatsapp-float { width: 48px; height: 48px; font-size: 22px; bottom: 15px; right: 15px; }
+            .card-img { height: 220px; }
+            .grid { gap: 22px; }
+        }
     </style>
 </head>
 <body>
 
+<!-- SVG ICON SPRITE (no external font/CDN dependency) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="icon-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15 15 0 0 1 0 20a15 15 0 0 1 0-20z"/></symbol>
+    <symbol id="icon-calendar" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></symbol>
+    <symbol id="icon-pin" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></symbol>
+    <symbol id="icon-arrow-right" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></symbol>
+    <symbol id="icon-phone" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
+    <symbol id="icon-envelope" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2 7 12 14 22 7"/></symbol>
+    <symbol id="icon-bars" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></symbol>
+    <symbol id="icon-whatsapp" viewBox="0 0 24 24" class="icon-solid"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2zm5.8 14.05c-.24.68-1.4 1.3-1.94 1.38-.5.08-1.13.11-1.82-.11-.42-.13-.96-.31-1.65-.6-2.9-1.25-4.8-4.17-4.94-4.36-.14-.19-1.18-1.57-1.18-3 0-1.43.75-2.13 1.02-2.42.27-.29.58-.36.78-.36h.56c.18 0 .42-.07.65.5.24.58.82 2 .89 2.15.07.14.11.31.02.5-.09.19-.14.31-.28.48-.14.16-.29.36-.42.49-.14.14-.28.29-.12.57.16.28.71 1.17 1.53 1.9 1.05.94 1.94 1.23 2.22 1.37.28.14.44.12.6-.07.16-.19.68-.79.86-1.06.18-.27.36-.23.6-.14.24.09 1.53.72 1.79.85.26.14.43.2.5.31.06.11.06.65-.18 1.33z"/></symbol>
+    <symbol id="icon-facebook" viewBox="0 0 24 24" class="icon-solid"><path d="M13.5 21v-8h2.7l.4-3.2h-3.1V7.7c0-.93.26-1.56 1.6-1.56h1.7V3.3C15.96 3.2 15 3.1 13.9 3.1c-2.3 0-3.9 1.4-3.9 4v2.7H7.3v3.2H10V21h3.5z"/></symbol>
+    <symbol id="icon-instagram" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" class="icon-solid"/></symbol>
+    <symbol id="icon-x" viewBox="0 0 24 24"><line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/></symbol>
+    <symbol id="icon-youtube" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="4"/><polygon points="10 9 16 12 10 15" class="icon-solid" fill="#111"/></symbol>
+  </defs>
+</svg>
+
     <nav>
         <div class="container nav-content">
-            <a href="#" class="logo" ><img src="images/LOGO PNG1.PNG" alt="Lets Fly Logo"></a>
-            <ul class="nav-links">
+            <a href="#" class="logo"><img src="images/LOGO PNG1.PNG" alt="Lets Fly Holiday Pvt Ltd Logo"></a>
+            <ul class="nav-links" id="navLinks">
                 <li><a href="#">Home</a></li>
                 <li><a href="#">Packages</a></li>
                 <li><a href="#">Hotels</a></li>
                 <li><a href="#" class="nav-btn">Get Started</a></li>
             </ul>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+                <svg class="icon"><use href="#icon-bars"/></svg>
+            </button>
         </div>
     </nav>
 
     <header class="hero">
         <div class="container hero-inner">
-           
             <h1 class="hero-title">Adventure & <span class="highlight">Experience</span> The World</h1>
             <p>Discover soulful destinations and create memories that last a lifetime with our exclusive hand-picked travel deals.</p>
-            
+
             <div class="search-container">
                 <div class="search-field">
-                    <i class="fa-solid fa-earth-americas"></i>
+                    <svg class="icon"><use href="#icon-globe"/></svg>
                     <div>
                         <label>Destination</label>
                         <input type="text" placeholder="Where to go?">
                     </div>
                 </div>
                 <div class="search-field">
-                    <i class="fa-solid fa-calendar-days"></i>
+                    <svg class="icon"><use href="#icon-calendar"/></svg>
                     <div>
                         <label>Type</label>
                         <input type="text" placeholder="Adventure, Relax...">
@@ -526,104 +223,103 @@
                 </div>
                 <div class="card-content">
                     <h3>Delhi-Agra</h3>
-                    <div class="location"><i class="fa-solid fa-location-dot"></i> Agra, India</div>
-                    <a href="#" class="book-link">Explore Deal <i class="fa-solid fa-arrow-right"></i></a>
+                    <div class="location"><svg class="icon"><use href="#icon-pin"/></svg> Agra, India</div>
+                    <a href="#" class="book-link">Explore Deal <svg class="icon"><use href="#icon-arrow-right"/></svg></a>
                 </div>
             </div>
 
-
             <div class="card">
                 <div class="card-img">
-                    <img src="images/kashmir.jpg.jpeg" alt="Taj Mahal">
+                    <img src="images/kashmir.jpg.jpeg" alt="Kashmir">
                     <div class="price-badge">₹14000 / Person</div>
                 </div>
                 <div class="card-content">
                     <h3>Kashmir</h3>
-                    <div class="location"><i class="fa-solid fa-location-dot"></i> Srinagar, India</div>
-                    <a href="#" class="book-link">Explore Deal <i class="fa-solid fa-arrow-right"></i></a>
+                    <div class="location"><svg class="icon"><use href="#icon-pin"/></svg> Srinagar, India</div>
+                    <a href="#" class="book-link">Explore Deal <svg class="icon"><use href="#icon-arrow-right"/></svg></a>
                 </div>
             </div>
 
             <div class="card">
                 <div class="card-img">
-                    <img src="images/himachal.jpg.jpeg" alt="Taj Mahal">
+                    <img src="images/himachal.jpg.jpeg" alt="Himachal">
                     <div class="price-badge">₹13000 / Person</div>
                 </div>
                 <div class="card-content">
                     <h3>Himachal</h3>
-                    <div class="location"><i class="fa-solid fa-location-dot"></i> manali, India</div>
-                    <a href="#" class="book-link">Explore Deal <i class="fa-solid fa-arrow-right"></i></a>
+                    <div class="location"><svg class="icon"><use href="#icon-pin"/></svg> manali, India</div>
+                    <a href="#" class="book-link">Explore Deal <svg class="icon"><use href="#icon-arrow-right"/></svg></a>
                 </div>
             </div>
 
             <div class="card">
                 <div class="card-img">
-                    <img src="images/singapore.jpg.jpeg" alt="Taj Mahal">
+                    <img src="images/singapore.jpg.jpeg" alt="Singapore">
                     <div class="price-badge">₹59000 / Person</div>
                 </div>
                 <div class="card-content">
                     <h3>Singapore</h3>
-                    <div class="location"><i class="fa-solid fa-location-dot"></i> singapore</div>
-                    <a href="#" class="book-link">Explore Deal <i class="fa-solid fa-arrow-right"></i></a>
+                    <div class="location"><svg class="icon"><use href="#icon-pin"/></svg> singapore</div>
+                    <a href="#" class="book-link">Explore Deal <svg class="icon"><use href="#icon-arrow-right"/></svg></a>
                 </div>
             </div>
 
             <div class="card">
                 <div class="card-img">
-                    <img src="images/malaysia.jpg.jpeg" alt="Taj Mahal">
+                    <img src="images/malaysia.jpg.jpeg" alt="Malaysia">
                     <div class="price-badge">₹18000 / Person</div>
                 </div>
                 <div class="card-content">
                     <h3>Malayasia</h3>
-                    <div class="location"><i class="fa-solid fa-location-dot"></i> kuala lumpur </div>
-                    <a href="#" class="book-link">Explore Deal <i class="fa-solid fa-arrow-right"></i></a>
+                    <div class="location"><svg class="icon"><use href="#icon-pin"/></svg> kuala lumpur </div>
+                    <a href="#" class="book-link">Explore Deal <svg class="icon"><use href="#icon-arrow-right"/></svg></a>
                 </div>
             </div>
             <div class="card">
                 <div class="card-img">
-                    <img src="images/thailand.jpg.jpeg" alt="Taj Mahal">
+                    <img src="images/thailand.jpg.jpeg" alt="Thailand">
                     <div class="price-badge">₹16000/ Person</div>
                 </div>
                 <div class="card-content">
                     <h3>Thailand</h3>
-                    <div class="location"><i class="fa-solid fa-location-dot"></i> Bangkok</div>
-                    <a href="#" class="book-link">Explore Deal <i class="fa-solid fa-arrow-right"></i></a>
+                    <div class="location"><svg class="icon"><use href="#icon-pin"/></svg> Bangkok</div>
+                    <a href="#" class="book-link">Explore Deal <svg class="icon"><use href="#icon-arrow-right"/></svg></a>
                 </div>
             </div>
 
             <div class="card">
                 <div class="card-img">
-                    <img src="images/DUBAI.jpg.jpeg" alt="Taj Mahal">
+                    <img src="images/DUBAI.jpg.jpeg" alt="Dubai">
                     <div class="price-badge">₹65000 / Person</div>
                 </div>
                 <div class="card-content">
                     <h3>Dubai</h3>
-                    <div class="location"><i class="fa-solid fa-location-dot"></i> UAE</div>
-                    <a href="#" class="book-link">Explore Deal <i class="fa-solid fa-arrow-right"></i></a>
+                    <div class="location"><svg class="icon"><use href="#icon-pin"/></svg> UAE</div>
+                    <a href="#" class="book-link">Explore Deal <svg class="icon"><use href="#icon-arrow-right"/></svg></a>
                 </div>
             </div>
 
             <div class="card">
                 <div class="card-img">
-                    <img src="images/srilanka.jpg.jpeg" alt="Taj Mahal">
+                    <img src="images/srilanka.jpg.jpeg" alt="Sri Lanka">
                     <div class="price-badge">₹35000 / Person</div>
                 </div>
                 <div class="card-content">
                     <h3>srilanka</h3>
-                    <div class="location"><i class="fa-solid fa-location-dot"></i> colombo</div>
-                    <a href="#" class="book-link">Explore Deal <i class="fa-solid fa-arrow-right"></i></a>
+                    <div class="location"><svg class="icon"><use href="#icon-pin"/></svg> colombo</div>
+                    <a href="#" class="book-link">Explore Deal <svg class="icon"><use href="#icon-arrow-right"/></svg></a>
                 </div>
             </div>
 
             <div class="card">
                 <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1512495039889-52a3b799c9bc?auto=format&fit=crop&w=800&q=80" alt="Taj Mahal">
+                    <img src="https://images.unsplash.com/photo-1512495039889-52a3b799c9bc?auto=format&fit=crop&w=800&q=80" alt="Russia">
                     <div class="price-badge">₹95000 / Person</div>
                 </div>
                 <div class="card-content">
                     <h3>Russia</h3>
-                    <div class="location"><i class="fa-solid fa-location-dot"></i> Moscow</div>
-                    <a href="#" class="book-link">Explore Deal <i class="fa-solid fa-arrow-right"></i></a>
+                    <div class="location"><svg class="icon"><use href="#icon-pin"/></svg> Moscow</div>
+                    <a href="#" class="book-link">Explore Deal <svg class="icon"><use href="#icon-arrow-right"/></svg></a>
                 </div>
             </div>
 
@@ -634,55 +330,56 @@
                 </div>
                 <div class="card-content">
                     <h3>London</h3>
-                    <div class="location"><i class="fa-solid fa-location-dot"></i> London, UK</div>
-                    <a href="#" class="book-link">Explore Deal <i class="fa-solid fa-arrow-right"></i></a>
+                    <div class="location"><svg class="icon"><use href="#icon-pin"/></svg> London, UK</div>
+                    <a href="#" class="book-link">Explore Deal <svg class="icon"><use href="#icon-arrow-right"/></svg></a>
                 </div>
             </div>
 
             <div class="card">
                 <div class="card-img">
-                    <img src="images/paris.jpg.jpeg" alt="Moscow">
+                    <img src="images/paris.jpg.jpeg" alt="Paris">
                     <div class="price-badge">₹99,000 / Person</div>
                 </div>
                 <div class="card-content">
                     <h3>Paris</h3>
-                    <div class="location"><i class="fa-solid fa-location-dot"></i> France</div>
-                    <a href="#" class="book-link">Explore Deal <i class="fa-solid fa-arrow-right"></i></a>
+                    <div class="location"><svg class="icon"><use href="#icon-pin"/></svg> France</div>
+                    <a href="#" class="book-link">Explore Deal <svg class="icon"><use href="#icon-arrow-right"/></svg></a>
                 </div>
             </div>
 
              <div class="card">
                 <div class="card-img">
-                    <img src="images/SWISS.jpg.jpeg" alt="Moscow">
+                    <img src="images/SWISS.jpg.jpeg" alt="Switzerland">
                     <div class="price-badge">₹110,000 / Person</div>
                 </div>
                 <div class="card-content">
                     <h3>Swiss</h3>
-                    <div class="location"><i class="fa-solid fa-location-dot"></i> Switzerland</div>
-                    <a href="#" class="book-link">Explore Deal <i class="fa-solid fa-arrow-right"></i></a>
+                    <div class="location"><svg class="icon"><use href="#icon-pin"/></svg> Switzerland</div>
+                    <a href="#" class="book-link">Explore Deal <svg class="icon"><use href="#icon-arrow-right"/></svg></a>
                 </div>
             </div>
         </div>
     </section>
-<a href="https://wa.me/+919966790770?text=I'm%20interested%20in%20booking%20a%20trip%20with%20Lets%20Fly!" 
-   class="whatsapp-float" 
+
+<a href="https://wa.me/+919966790770?text=I'm%20interested%20in%20booking%20a%20trip%20with%20Lets%20Fly%20Holiday%20Pvt%20Ltd!"
+   class="whatsapp-float"
    target="_blank">
-    <i class="fa-brands fa-whatsapp"></i>
+    <svg class="icon" style="width:1.1em;height:1.1em;color:#fff;"><use href="#icon-whatsapp"/></svg>
     <span class="tooltip">Chat with us!</span>
 </a>
-</body>
+
 <footer class="main-footer">
     <div class="container footer-grid">
         <div class="footer-col">
-            <h2 class="logo-footer">Lets fly.</h2>
+            <h2 class="logo-footer">Lets Fly Holiday Pvt Ltd.</h2>
             <p class="footer-desc">
                 Fueling your passion for discovery. We provide hand-picked experiences that turn your dream vacations into reality.
             </p>
             <div class="social-links">
-                <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-                <a href="https://www.instagram.com/letsflyholiday/"><i class="fa-brands fa-instagram"></i></a>
-                <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
-                <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                <a href="#"><svg class="icon" style="width:.9em;height:.9em;"><use href="#icon-facebook"/></svg></a>
+                <a href="https://www.instagram.com/letsflyholiday/"><svg class="icon" style="width:.9em;height:.9em;"><use href="#icon-instagram"/></svg></a>
+                <a href="#"><svg class="icon" style="width:.9em;height:.9em;"><use href="#icon-x"/></svg></a>
+                <a href="#"><svg class="icon" style="width:.9em;height:.9em;"><use href="#icon-youtube"/></svg></a>
             </div>
         </div>
 
@@ -692,7 +389,7 @@
                 <li><a href="#">About Us</a></li>
                 <li><a href="#">Tour Packages</a></li>
                 <li><a href="#">Hotel Deals</a></li>
-                <li><a href="https://wa.me/+919966790770?text=I'm%20interested%20in%20booking%20a%20trip%20with%20Lets%20Fly!">Contact Us</a></li>
+                <li><a href="https://wa.me/+919966790770?text=I'm%20interested%20in%20booking%20a%20trip%20with%20Lets%20Fly%20Holiday%20Pvt%20Ltd!">Contact Us</a></li>
             </ul>
         </div>
 
@@ -709,21 +406,38 @@
         <div class="footer-col">
             <h3>Contact Us</h3>
             <div class="contact-item">
-                <i class="fa-solid fa-phone"></i>
+                <svg class="icon"><use href="#icon-phone"/></svg>
                 <span>+91 9966790770</span>
             </div>
             <div class="contact-item">
-                <i class="fa-solid fa-envelope"></i>
+                <svg class="icon"><use href="#icon-envelope"/></svg>
                 <span>info@letsflyholiday.com</span>
             </div>
             <div class="contact-item">
-                <i class="fa-solid fa-location-dot"></i>
+                <svg class="icon"><use href="#icon-pin"/></svg>
                 <span>D No.23/929, 1st floor SpaceQ, Vahabpet, Nellore -524003 , Andhra Pradesh</span>
             </div>
         </div>
     </div>
     <div class="footer-bottom">
-        <p>&copy; 2026 Lets Fly. Made with ❤️ for Happy Travelers.</p>
+        <p>&copy; 2026 Lets Fly Holiday Pvt Ltd. Made with ❤️ for Happy Travelers.</p>
     </div>
 </footer>
+
+<script>
+    var toggleBtn = document.getElementById('navToggle');
+    var navLinks = document.getElementById('navLinks');
+    if (toggleBtn && navLinks) {
+        toggleBtn.addEventListener('click', function () {
+            navLinks.classList.toggle('open');
+        });
+        navLinks.querySelectorAll('a').forEach(function (link) {
+            link.addEventListener('click', function () {
+                navLinks.classList.remove('open');
+            });
+        });
+    }
+</script>
+
+</body>
 </html>
